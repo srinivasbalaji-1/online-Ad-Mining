@@ -1,0 +1,43 @@
+Database Management System ( Individual Project Report)
+UFID : 94217395
+
+The major part of the logic in the program resides in the getads procedure that is implemented in the adwords.sql file.
+The space seperated query string stored in the queries table is split into tokens and stored in a table type. This table
+is used in the subsequent opening of a SQL cursor. Following is the short description the various  aliases used in SQL query.
+The main logic is divided into subparts and each subquery implements a part of the main logic.
+
+- SumA  : sum of the count of all term in keyword table squared for the paticular advertiser.
+- SumB  : sum of the count of all tokens in Query table squared for the paticular qid.
+- SumAB : sum of the count of all tokens in both Query and keywords table squared for the paticular qid,aid.
+
+ The above three steps were then used to compute the cosine similarity score.
+
+- BDSum (for tasks 1,3 and 5): This is used to compute bidsum for each advertiser based on his eligibility of having a balance greater than the bid based on first price auction.
+- Bvalue(for tasks 2,4 and 6): This is used to compute bidsum for each advertiser based on his eligibility of having a balance greater than the bid based on second price auction.
+
+The bidsum calculation for second price auction used ORACLE's inbuilt function lead in order to get the next highest bid value.
+
+All these table joined on advertiserID after checking if the bidsum was less than the balance.
+
+An associative array adcount was used to keep track of the balance of the various advertisers so that the advertisers were charged only for first ctc*100 impressions for
+every 100 impressions. 
+
+The most difficult part in the project was to maintain balance deduction for only the first ctc*100 impressions.
+The use of associative array adcount to keep track of the count and balance of each advertiser helped.
+
+Also, the eligibility criteria for bidder was influenced by the ctc rate. In order to get all this computation
+into a single SQL query , an additional column balance was added to the advertiser table.
+Everytime an advertiser was selected in the top k bidders his balance was updated in the advertisers table.
+
+Learning Experience:
+
+The project was extremely challenging in terms of developing a complicated query for the task of ad-mining.  
+
+Also, included in the project are the control files used to load data.
+ctl.txt - For the queries table
+ad.txt  - For the advertisers table
+key.txt - For the keywords table
+
+Loading tables into the database requires the above control files to be in the same directore as the adwords.java file. 
+
+The program was tested on dataset of 30000 queries and matched all the sample outputs provided. 
