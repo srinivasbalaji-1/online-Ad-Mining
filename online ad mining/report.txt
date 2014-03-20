@@ -1,5 +1,4 @@
 Database Management System ( Individual Project Report)
-UFID : 94217395
 
 The major part of the logic in the program resides in the getads procedure that is implemented in the adwords.sql file.
 The space seperated query string stored in the queries table is split into tokens and stored in a table type. This table
@@ -28,8 +27,6 @@ The use of associative array adcount to keep track of the count and balance of e
 Also, the eligibility criteria for bidder was influenced by the ctc rate. In order to get all this computation
 into a single SQL query , an additional column balance was added to the advertiser table.
 Everytime an advertiser was selected in the top k bidders his balance was updated in the advertisers table.
-
-Learning Experience:
 
 The project was extremely challenging in terms of developing a complicated query for the task of ad-mining.  
 
